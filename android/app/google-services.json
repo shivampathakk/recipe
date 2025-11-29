@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1010403906255",
+    "firebase_url": "https://react-getting-started-3bd53-default-rtdb.firebaseio.com",
+    "project_id": "react-getting-started-3bd53",
+    "storage_bucket": "react-getting-started-3bd53.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1010403906255:android:7b3f83f635b9870f7a5dba",
+        "android_client_info": {
+          "package_name": "com.simplefigma"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1010403906255-l90vpi6pas29i98n077n78vm1mniaako.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.simplefigma",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "1010403906255-5plbhq18mo19pkv639iqkaum4hk4nvo6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC3eIiweRzaCZzFSJSxJdxmqaIlUmtTf3g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1010403906255-3v203e6465hp9j9s8fcr2n3i2khd97vv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
