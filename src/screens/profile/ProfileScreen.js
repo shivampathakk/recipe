@@ -1,3 +1,6 @@
+// 
+
+
 import React, { useContext, useEffect, useState } from 'react';
 import {
   View,
@@ -17,9 +20,13 @@ const ProfileScreen = ({ navigation }) => {
   const [showLogout, setShowLogout] = useState(false);
 
   const loadLikedRecipes = async () => {
-    const res = await client.get('/recipes');
-    const list = res.data.filter((r) => (r.likes || []).includes(user.id));
-    setLikedRecipes(list);
+    try {
+      const res = await client.get('/recipes');
+      const list = res.data.filter((r) => (r.likes || []).includes(user.id));
+      setLikedRecipes(list);
+    } catch (e) {
+      console.log('Error loading liked recipes', e);
+    }
   };
 
   useEffect(() => {
@@ -32,10 +39,28 @@ const ProfileScreen = ({ navigation }) => {
     setShowLogout(false);
   };
 
+  const renderLikedItem = ({ item }) => (
+    <TouchableOpacity
+      style={styles.likedItem}
+      // 🟢 IMPORTANT: nested navigation to Home -> RecipeDetail
+      onPress={() =>
+        navigation.navigate('Home', {
+          screen: 'RecipeDetail',
+          params: { recipeId: item.id },
+        })
+      }
+    >
+      <Text style={styles.likedTitle} numberOfLines={1}>
+        {item.title}
+      </Text>
+      <Icon name="chevron-forward" size={18} color="#999" />
+    </TouchableOpacity>
+  );
+
   return (
     <View style={styles.container}>
       <View style={styles.headerCard}>
-        <View style={styles.avatar}>
+        <View className="avatar" style={styles.avatar}>
           <Text style={styles.avatarText}>
             {user.name?.charAt(0)?.toUpperCase() || 'U'}
           </Text>
@@ -50,16 +75,9 @@ const ProfileScreen = ({ navigation }) => {
       <FlatList
         data={likedRecipes}
         keyExtractor={(item) => item.id.toString()}
-        renderItem={({ item }) => (
-          <TouchableOpacity
-            style={styles.likedItem}
-            onPress={() => navigation.navigate('RecipeDetail', { recipeId: item.id })}
-          >
-            <Text style={styles.likedTitle} numberOfLines={1}>{item.title}</Text>
-            <Icon name="chevron-forward" size={18} color="#999" />
-          </TouchableOpacity>
-        )}
+        renderItem={renderLikedItem}
         ListEmptyComponent={<Text>No liked recipes yet.</Text>}
+        contentContainerStyle={{ paddingBottom: 80 }}
       />
 
       <TouchableOpacity style={styles.logoutBtn} onPress={() => setShowLogout(true)}>
